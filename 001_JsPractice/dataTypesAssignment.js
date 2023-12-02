@@ -32,3 +32,18 @@ let substraction = function (a, b) {
 
 console.log(`The addition of two number is ${addition(a, b)}`);
 console.log(`The substraction of two number is ${substraction(a, b)}`);
+
+// Question-4:    WAP to calculate total marks in two subject and then calculate percentage.
+
+let sub1, sub2;
+
+let totalMarks = function (subject1, subject2) {
+    return subject1 + subject2;
+}
+
+let percentage = function (sum) {
+    return (sum/200)*100;
+}
+
+console.log(`The sum of two subject is ${totalMarks(90,100)}`)
+console.log(`The percentage is ${percentage(totalMarks(90,100))}`)
