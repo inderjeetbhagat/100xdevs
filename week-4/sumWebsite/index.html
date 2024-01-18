@@ -19,6 +19,15 @@
             
         // }
 
+            function debouncePopulateDiv() {
+                clearTimeout(time);
+             let time = setTimeout(function(){
+                populateDiv2()
+            },1000)
+            }
+
+
+
 
         async function populateDiv2() {
             const a = document.getElementById("firstNumber").value;
@@ -35,8 +44,8 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" placeholder="First Number" id="firstNumber"> <br><br>
-    <input type="text" placeholder="Second Number" id = "secondNumber"> <br><br>
+    <input oninput="debouncePopulateDiv()" type="text" placeholder="First Number" id="firstNumber"> <br><br>
+    <input oninput="debouncePopulateDiv()" type="text" placeholder="Second Number" id = "secondNumber"> <br><br>
     <button onclick="populateDiv()">Calculate Sum</button> <br><br>
     <div id="finalSum"></div>
 </body>
