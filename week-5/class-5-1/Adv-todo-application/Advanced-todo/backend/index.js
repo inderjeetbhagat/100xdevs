@@ -3,6 +3,7 @@
 
 const express = require("express");
 const { createTodo, updateTodo } = require("./types");
+const { todo } = require("./db");
 const app = express();
 
 app.use(express.json());
@@ -18,9 +19,18 @@ app.post("/todo", function(req, res){
         })
         return;
     }
+    todo.create({
+        title: createPayload.title,
+        description: createPayload.description,
+    })
+
+    res.json({
+        msg: "todo created"
+    })
 })
 app.get("/todos", function(req, res){ 
-
+    const todos = todo.find({});
+    
 })
 app.put("/completed", function(req, res){
 const updatePayload = req.body;
