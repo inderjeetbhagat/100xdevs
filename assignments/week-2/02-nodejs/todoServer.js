@@ -43,7 +43,68 @@
   const bodyParser = require('body-parser');
   
   const app = express();
+  let todos = [];
   
   app.use(bodyParser.json());
+
+  app.get("/todos", (req,res) => {
+    res.status(200).json(todos);
+  })
+
+  app.get("/todos/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const todo = todos.find(todo => todo.id === id)
+
+    if(todo) {
+      res.status(200).json(todo);
+    } else {
+      res.status(404).send({message: 'Not Found'})
+    }
+  })
+
+  app.post("/todos", (req,res) => {
+    const {title, description} = req.body
+    const newTodo = {
+      id :generateId(),
+      title,
+      description,
+      isCompleted: false
+    }
+
+    todos.push(newTodo);
+    res.status(201).json({id: newTodo.id})
+  })
+
+  app.put("/todos/:id", (req, res) => {
+    const id = parseInt(req.params.id)
+    const {title, description, isCompleted} = req.body;
+    const todoIndex = todos.findIndex(todo => todo.id === id)
+
+    if(todoIndex !== -1) {
+      todos[todoIndex] = {id, title , description, isCompleted};
+      res.status(200).send("Item was found")
+    } else {
+      res.status(404).send("Item not found")
+    }
+  })
+
+  app.delete("/todos/:id", (req,res) => {
+    const id = parseInt(req.params.id)
+    
+    const todoIndex = todos.findIndex(todo => todo.id === id)
+    if(todoIndex !== -1) {
+      todos.splice(todoIndex,1);
+      res.status(200).send("Item Deleted")
+    } else {
+      res.status(404).send("Item not found")
+    }
+  })
+  const generateId = () => {
+    return Math.floor(Math.random() * 100000);
+  };
+
+  app.listen(3000, () => {
+    console.log(`Server is running on port 3000`);
+  });
   
   module.exports = app;
