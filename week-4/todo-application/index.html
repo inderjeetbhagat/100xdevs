@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+</head> 
 <body>
     <input type="text" placeholder="Todo Title" id="title"> <br><br>
     <input type="text" placeholder="Todo Description" id="description"> <br><br>
@@ -31,20 +31,37 @@
     }
 // State will always be an array
 //Every Element od State would have a title, description and id
-    function updateDOM(state) {
-       const parent = document.getElementById("container")
-        parent.innerHTML = "";
-        for (let i=0; i<state.length; i++) {
-            const child = createChild(state[i].title, state[i].description, state[i].id);
-            parent.appendChild(child);
-        }
+   function updateDOM(state) {
+    let parent = document.getElementById("container");
+    parent.innerHTML = " ";
+    for(let i = 0; i <state.length; i++) {
+        const child = createChild(state[i].title, state[i].description, state[i].id)
+        parent.appendChild(child);
     }
-    window.setInterval(async function() {
-        const res = await fetch("https://sum-server.100xdevs.com/todos");
-    const json = await res.json();
-    updateDOM(json.todos);
-    }, 500)
-    
+   }
+
+   window.setInterval(async function(){
+let res = await fetch("https://sum-server.100xdevs.com/todos");
+const json = await res.json();
+ updateDOM(json.todos);
+   }, 500);
+   
+
+   
 </script>
 </html>
-
+<!-- 
+function updateDOM(state) {
+    const parent = document.getElementById("container")
+     parent.innerHTML = "";
+     for (let i=0; i<state.length; i++) {
+         const child = createChild(state[i].title, state[i].description, state[i].id);
+         parent.appendChild(child);
+     }
+ }
+ window.setInterval(async function() {
+     const res = await fetch("https://sum-server.100xdevs.com/todos");
+ const json = await res.json();
+ updateDOM(json.todos);
+ }, 500)
+  -->

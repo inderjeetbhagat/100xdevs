@@ -29,13 +29,13 @@
 
 
 
-        async function populateDiv2() {
+     async  function populateDiv() {
             const a = document.getElementById("firstNumber").value;
             const b = document.getElementById("secondNumber").value;
-
+            const c = parseInt(a) + parseInt(b);
             const response = await fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b)
             const ans = await response.text();
-            document.getElementById("finalSum").innerHTML = ans;
+            document.getElementById("finalSum").innerHTML = response;
         }
     </script>
 <head>
